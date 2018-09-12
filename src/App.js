@@ -5,8 +5,11 @@ import { createStore, applyMiddleware } from "redux";
 import reducers from "./reducers";
 import firebase from "firebase";
 
-import LoginForm from "./components/LoginForm";
 import reduxThunk from "redux-thunk";
+
+import LoginForm from "./components/LoginForm";
+import EmployeeList from "./components/EmployeeList";
+import { StackNavigator } from "react-navigation";
 
 class App extends Component {
   componentWillMount() {
@@ -27,10 +30,15 @@ class App extends Component {
     //arg3 - store enhancer
     return (
       <Provider store={store}>
-        <LoginForm />
+        <AppStackNavigator />
       </Provider>
     );
   }
 }
+
+const AppStackNavigator = new StackNavigator({
+  Login: { screen: LoginForm },
+  EmployeeList: { screen: EmployeeList }
+});
 
 export default App;

@@ -9,6 +9,7 @@ import reduxThunk from "redux-thunk";
 
 import LoginForm from "./components/LoginForm";
 import EmployeeList from "./components/EmployeeList";
+import EmployeeCreate from "./components/EmployeeCreate";
 import { StackNavigator } from "react-navigation";
 
 class App extends Component {
@@ -38,7 +39,8 @@ class App extends Component {
 
 const AppStackNavigator = new StackNavigator({
   Login: { screen: LoginForm },
-  EmployeeList: { screen: EmployeeList }
+  EmployeeList: { screen: EmployeeList },
+  EmployeeCreate: { screen: EmployeeCreate }
 });
 
 export default App;

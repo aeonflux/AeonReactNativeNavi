@@ -1,6 +1,7 @@
 import {
     EMPLOYEE_UPDATE,
-    EMPLOYEE_CREATE
+    EMPLOYEE_CREATE,
+    EMPLOYEES_FETCH_SUCCESS
 } from "./types"
 import firebase from "firebase";
 
@@ -30,4 +31,21 @@ export const employeeCreate = ({ name, phone, shift }) => {
             })
     }
 
+}
+
+export const employeesFetch = () => {
+    // Authenticated User
+    const { currentUser } = firebase.auth();
+
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/employees`)
+            // Fetch Data from Database
+            // Watches the data automatically
+            .on('value', snapshot => {
+                // snapshot = object that describes the data
+                //snapshot.val() = actual data
+                dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() })
+            })
+
+    }
 }

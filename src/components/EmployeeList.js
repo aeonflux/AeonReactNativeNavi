@@ -1,7 +1,17 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import { employeesFetch } from "../actions";
+
+
 import { View, Text, Button } from "react-native";
 
 class EmployeeList extends Component {
+
+  // before screen renders
+  componentWillMount() {
+    this.props.employeesFetch();
+  }
+
   static navigationOptions = ({ navigation, screenProps }) => ({
 
     title: "Employee List",
@@ -30,4 +40,4 @@ class EmployeeList extends Component {
   }
 }
 
-export default EmployeeList;
+export default connect(null, employeesFetch)(EmployeeList);

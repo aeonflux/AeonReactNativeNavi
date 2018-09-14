@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { Card, CardSection, Input, Button } from "./common";
+import { View, Text, Button } from "react-native";
 
 class EmployeeList extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
@@ -25,25 +24,7 @@ class EmployeeList extends Component {
   render() {
     return (
       <View>
-        <Card>
-          <CardSection>
-            <Input
-              label="Name"
-              placholder="Jane"
-            ></Input>
-          </CardSection>
-          <CardSection>
-            <Input
-              label="Phone"
-              placholder="555555"
-            ></Input>
-          </CardSection>
-          <Card>
-            <Button>
-              Create
-            </Button>
-          </Card>
-        </Card>
+        <Text> Employee List Here </Text>
       </View>
     );
   }

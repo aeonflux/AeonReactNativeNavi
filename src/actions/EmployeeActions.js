@@ -1,7 +1,8 @@
 import {
     EMPLOYEE_UPDATE,
     EMPLOYEE_CREATE,
-    EMPLOYEES_FETCH_SUCCESS
+    EMPLOYEES_FETCH_SUCCESS,
+    EMPLOYEE_SAVE_SUCCESS
 } from "./types"
 import firebase from "firebase";
 
@@ -59,7 +60,8 @@ export const employeeSave = ({ name, phone, shift, uid }) => {
         firebase.database().ref(`/users/$(currentUser.uid)/employees/$(uid)`)
             .set({ name, phone, shift })
             .then(() => {
-                console.log("Saved");
+                // Reset Form
+                dispatch({ type: EMPLOYEE_SAVE_SUCCESS })
             })
     }
 }

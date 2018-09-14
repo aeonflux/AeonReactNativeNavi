@@ -32,6 +32,8 @@ class EmployeeEdit extends Component {
         const { name, phone, shift } = this.props;
         // Save New Data to Firebase
         this.props.employeeSave({ name, phone, shift, uid: this.props.employee.uid })
+        //  Navigate to Employee List Screen
+        this.props.navigation.navigate("EmployeeList");
     }
 
     render() {

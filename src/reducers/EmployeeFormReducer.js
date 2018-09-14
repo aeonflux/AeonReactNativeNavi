@@ -20,6 +20,8 @@ export default (state = INITIAL_STATE, action) => {
             // user succesfully created 
             // reset form
             return INITIAL_STATE;
+        case EMPLOYEE_SAVE_SUCCESS:
+            return INITIAL_STATE;
         default:
             return state;
     }

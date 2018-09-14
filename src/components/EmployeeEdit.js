@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { Card, CardSection, Button } from "./common";
+import { Card, CardSection, Button, Confirm } from "./common";
 import EmployeeForm from "./EmployeeForm";
 import { connect } from "react-redux";
 import { employeeUpdate, employeeSave } from "../actions";
 import _ from 'lodash';
+import Communications from "react-native-communications";
 
 class EmployeeEdit extends Component {
+    // component level state
+    state = { showModal: false };
+
     static navigationOptions = ({ screenProps }) => ({
 
         title: "Edit Employee",
@@ -36,6 +40,12 @@ class EmployeeEdit extends Component {
         this.props.navigation.navigate("EmployeeList");
     }
 
+    onTextPress() {
+        const { phone, shift } = this.props;
+
+        Communications.text(phone, `Your upcoming shift is on ${shift}`)
+    }
+
     render() {
         <Card>
             <EmployeeForm></EmployeeForm>
@@ -43,7 +53,23 @@ class EmployeeEdit extends Component {
                 <Button onPress={this.onButtonPress.bind(this)}>
                     Save Changes
                 </Button>
-            </CardSection >
+            </CardSection>
+            <CardSection>
+                <Button onPress={this.onTextPress.bind(this)}>
+                    Text Schedule
+                </Button>
+            </CardSection>
+            <CardSection onPress={() => this.setState({ showModal: !this.state.showModal })}>
+                <Button>
+                    Fire Employee
+                </Button>
+            </CardSection>
+            {/* Must be triggered once fire employee is invoked */}
+            <Confirm
+                visible={this.state.showModal}
+            >
+                Are you sure you want to delete this?
+            </Confirm>
         </Card >
     }
 }

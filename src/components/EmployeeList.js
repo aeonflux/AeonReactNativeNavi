@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
 import { employeesFetch } from "../actions";
-
-
-import { ListView, View, Text, Button } from "react-native";
+import { ListView, Button } from "react-native";
+import ListItem from "./ListItem"
 
 class EmployeeList extends Component {
   static navigationOptions = ({ navigation, screenProps }) => ({
@@ -51,14 +50,29 @@ class EmployeeList extends Component {
     this.dataSource = ds.cloneWithRows(employees);
   }
 
+  renderRow(employee) {
+    return <ListItem employee={employee}></ListItem>
+  }
 
   render() {
     return (
-      <View>
-        <Text> Employee List Here </Text>
-      </View>
+      <ListView
+        enableEmptySections
+        dataSource={this.dataSource}
+        renderRow={this.renderRow}>
+
+      </ListView>
     );
   }
 }
+
+const mapStateToProps = state => {
+  // convert object to arrays
+  const employees = _.map(state.employees, (val, uid) => {
+    return { ...val, uid };
+  });
+
+  return { employees };
+};
 
 export default connect(null, employeesFetch)(EmployeeList);
